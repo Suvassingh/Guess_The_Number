@@ -2,6 +2,9 @@ import { TextInput, View, StyleSheet, Alert } from "react-native";
 import PrimaryButton from "../components/UI/PrimaryButton";
 import { useState } from "react";
 import Colors from "../constant/colors";
+import OTitle from "../components/UI/Title";
+import Card from '../components/UI/card'
+import InstructionText from "../components/UI/InstructionTextComponent";
 
 function StartGameScreen({ onPickNumber }) {
   const [enteredNumber, setEnteredNumber] = useState("");
@@ -27,25 +30,31 @@ function StartGameScreen({ onPickNumber }) {
   }
   return (
     <View style={styles.rootContainer}>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.numberInput}
-          maxLength={2}
-          keyboardType="number-pad"
-          autoCapitalize="none"
-          autoCorrect={false}
-          onChangeText={numberInputHandler}
-          value={enteredNumber}
-        />
-        <View style={styles.buttonsContainer}>
-          <View style={styles.buttonContainer}>
-            <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
+      <OTitle>Guess my number</OTitle>
+      <Card>
+    
+          <InstructionText >Enter a Number</InstructionText>
+          <TextInput
+            style={styles.numberInput}
+            maxLength={2}
+            keyboardType="number-pad"
+            autoCapitalize="none"
+            autoCorrect={false}
+            onChangeText={numberInputHandler}
+            value={enteredNumber}
+          />
+          <View style={styles.buttonsContainer}>
+            <View style={styles.buttonContainer}>
+              <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
+            </View>
+            <View style={styles.buttonContainer}>
+              <PrimaryButton onPress={confirmInputHandler}>
+                Confirm
+              </PrimaryButton>
+            </View>
           </View>
-          <View style={styles.buttonContainer}>
-            <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
-          </View>
-        </View>
-      </View>
+
+      </Card>
     </View>
   );
 }
@@ -57,6 +66,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 100,
     alignItems: "center",
+    marginBottom: 40,
   },
   inputContainer: {
     padding: 16,
@@ -72,14 +82,20 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.35,
     alignItems: "center",
     gap: 16,
+    marginTop: 18,
   },
+  instructionText: {
+    color: Colors.acent500,
+    fontSize: 24,
+  },
+
   numberInput: {
     height: 56,
     width: 56,
     fontSize: 32,
     borderBottomColor: Colors.acent500,
     borderBottomWidth: 3,
-    color:Colors.acent500,
+    color: Colors.acent500,
     fontWeight: "bold",
     textAlign: "center",
   },
